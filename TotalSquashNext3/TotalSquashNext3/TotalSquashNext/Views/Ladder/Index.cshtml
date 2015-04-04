@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TotalSquashNext.Models.Ladder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ladderDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LadderRule.LadderRuleId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ladderDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LadderRule.LadderRuleId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ladderId }) |
+            @Html.ActionLink("View Ladder", "DisplayByLadder", "UserLadder", new { id=item.ladderId }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ladderId })
+        </td>
+    </tr>
+}
+
+</table>
