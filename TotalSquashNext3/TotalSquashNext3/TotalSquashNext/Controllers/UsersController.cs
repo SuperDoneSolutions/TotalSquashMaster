@@ -55,15 +55,37 @@ namespace TotalSquashNext.Controllers
 
 
         // GET: Users
+        //Returns a list of users.
         public ActionResult Index()
         {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin","Login");
+            }
+            if(((TotalSquashNext.Models.User)Session["currentUser"]).accountId!=1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
             var users = db.Users.Include(u => u.AccountType).Include(u => u.Country).Include(u => u.Organization).Include(u => u.Province).Include(u => u.Skill);
             return View(users.ToList());
         }
 
         // GET: Users/Details/5
+        //returns details of selected user - for admin only
         public ActionResult Details(int? id)
         {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +140,12 @@ namespace TotalSquashNext.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -142,6 +170,12 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,username,skillId,password,photo,wins,losses,ties,firstName,lastName,streetAddress,city,provinceId,postalCode,countryId,phoneNumber,emailAddress,gender,birthDate,accountId,locked,organizationId")] User user)
         {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+
             if (ModelState.IsValid)
             {
                 user.wins = (((TotalSquashNext.Models.User)Session["currentUser"]).wins);
@@ -167,6 +201,12 @@ namespace TotalSquashNext.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -180,6 +220,7 @@ namespace TotalSquashNext.Controllers
         }
 
         // POST: Users/Delete/5
+        //Deletes account, redirects to login page KT april 4
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -187,7 +228,7 @@ namespace TotalSquashNext.Controllers
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("VerifyLogin","Login");
         }
 
         protected override void Dispose(bool disposing)

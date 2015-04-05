@@ -60,7 +60,7 @@ namespace TotalSquashNext.Controllers
             Session["currentSkill"] = null;
             Session["currentAccount"] = null;
             Session["currentImage"] = null;
-            
+
             return View();
         }
 
@@ -79,16 +79,16 @@ namespace TotalSquashNext.Controllers
                 if (db.Users.Where(x => x.emailAddress == tempEmailVerify).Count() > 0)
                 {
                     var passHolder = (from x in db.Users
-                                     where x.emailAddress == tempEmailVerify
-                                     select x.password).Single();
-                    
+                                      where x.emailAddress == tempEmailVerify
+                                      select x.password).Single();
+
 
                     if (passHolder.ToString() == tempPassVerify)
                     {
                         TempData["message"] = "SUCCESS!";
                         var currentUser = (from x in db.Users
-                                             where x.emailAddress == tempEmailVerify
-                                             select x).ToList();
+                                           where x.emailAddress == tempEmailVerify
+                                           select x).ToList();
 
                         User selectedUser = currentUser[0];
 
@@ -111,44 +111,52 @@ namespace TotalSquashNext.Controllers
                         Session["currentUser"] = selectedUser;
 
                         Session["currentImage"] = (from x in db.Users
-                                                   where x.emailAddress==tempEmailVerify
+                                                   where x.emailAddress == tempEmailVerify
                                                    select x.photo).Single();
 
-                        if (Session["currentImage"]==null || Session["currentImage"]=="")
+                        if (Session["currentImage"] == null || Session["currentImage"] == "")
                         {
                             Session["currentImage"] = "../../Images/anon.png";
                         }
-                         
+
 
                         return RedirectToAction("LandingPage");
 
                     }
                     else
                     {
-                        TempData["message"] = "FAILURE!";
-                        return RedirectToAction("Index", "Home");
+                        TempData["message"] = "Incorrect email or password. Please try again.";
+                        return RedirectToAction("VerifyLogin", "Login");
                     }
 
                 }
-                    else
-                    {
-                        return HttpNotFound();
-                    }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-                
+
 
             return View();
         }
 
         public ActionResult LandingPage()
         {
-            if(Session["currentUser"]==null)
+            if (Session["currentUser"] == null)
             {
-                TempData["message"] = "Please login!...Sneaky";
+                TempData["message"] = "Please login to continue.";
                 return RedirectToAction("VerifyLogin");
             }
             return View();
         }
-
+        public ActionResult AdministrativeTools()
+        {
+            if (Session["currentUser"] == null)
+            {
+                TempData["message"] = "Please login to continue.";
+                return RedirectToAction("VerifyLogin");
+            }
+            return View();
+        }
     }
 }

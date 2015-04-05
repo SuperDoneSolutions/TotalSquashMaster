@@ -26,7 +26,7 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a href="dashboard.html" class="brand"><i class="icon-trophy">Total Squash</i></a>
+                <a href="dashboard.html" class="brand">Total Squash</a>
                 <table class="nav pull-right">
 
                     <tr>
@@ -34,11 +34,11 @@
                         {
                             @Html.AntiForgeryToken()
                             <td>
-                                <label style="font-size:12px">Username</label>
+                                <label style="font-size:12px; color:#DFDFDF;">Username</label>
                                 @Html.TextBoxFor(m => m.emailAddress, new { @class = "form-control" })
                             </td>
                             <td>
-                                <label style="font-size:12px">Password</label>
+                                <label style="font-size:12px; color:#DFDFDF;">Password</label>
                                 @Html.TextBoxFor(m => m.password, new { @class = "form-control" })
                             </td>
                             <td></td>
@@ -47,17 +47,21 @@
                             <td></td>
                             <td></td>
 
-                            <td>
-                                <input type="submit" value="Log in" class="btn-xs" style="margin-top:1em;" />
+                            <td >
+                                
+                                <input type="submit" value="Log in" class="btn-xs" style="margin-top:1em;font-size:10px;" />
+                                
+                            
                             </td>
                         }
-                        <td>
-                            <a href="~/Users/Create" class="text-info" style="margin-top:5em;">New User?</a>
+                       <td>
+                           <input type="button" value="Register" onclick="location.href='@Url.Action("Create","Users")'" style="margin-top:1em; font-size:10px;" class="btn-xs" />
+                           
                         </td>
 
                     </tr>
 
-
+                    
                 </table>
             </div>
         </div>
@@ -66,11 +70,18 @@
         <br>
         <br>
         <br>
+
         <div class="box">
-            <a href="dashboard.html">
+ <!--Took out <a> because we don't need it to be a link KT apr 5 -->
                 <img style="margin:auto; display:block;" src="../../Images/totalSquashLogo.png">
-            </a>
+            <br />
+            
         </div>
+        <br>
+        <br>
+        <br/>
+        <br>
+
         @*<div class="container">
             <div class="box-header">
                 <h5>YMCA - Cambridge: News</h5>
@@ -92,7 +103,7 @@
         <div class="container">
             <p>Total Squash</p>
             <div class="disclaimer">
-                <p>This is an example disclaimer. All rights reserved.</p>
+                <a style="color:#dfdfdf" href="mailto:superdonesolutions@gmail.com">Contact Us</a>
                 <p>Copyright © Super Done Solutions 2015</p>
             </div>
         </div>

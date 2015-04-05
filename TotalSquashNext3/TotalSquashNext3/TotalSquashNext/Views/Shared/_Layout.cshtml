@@ -20,10 +20,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Total Squash", "LandingPage", "Login", null, new { @class = "brand" })
+                <a class="brand" href="@Url.Action("LandingPage","Login")">Total Squash</a>
+               
                 <ul class="nav pull-right">
                     <li>
-                        @Html.ActionLink("Logout", "VerifyLogin", "Login", null, new { @class = "text" })
+                        <a class="brand" href="@Url.Action("VerifyLogin","Login")">Logout</a>
                     </li>
 
                 </ul>
@@ -60,6 +61,17 @@
                         <span class="sr-only">Statistics</span>
                     </a>
                 </li>
+                <!--Shows link to administration only, for easy navigation to court booking rules, ladder rules, etc.-->
+                @if ((((TotalSquashNext.Models.User)Session["currentUser"]).accountId == 1))
+                {
+                    <li>
+
+                        <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                            <i class="icon-bar-chart icon-large"></i>
+                            <span class="sr-only">Administrative Tools</span>
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -81,7 +93,7 @@
         <div class="container">
             <p>Total Squash</p>
             <div class="disclaimer">
-                <a href="mailto:superdonesolutions@gmail.com">Contact Us</a>
+                <a style="color:#dfdfdf;" href="mailto:superdonesolutions@gmail.com">Contact Us</a>
                 <p>Copyright © Super Done Solutions 2015</p>
             </div>
         </div>
