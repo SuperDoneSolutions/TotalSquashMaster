@@ -488,6 +488,7 @@
     <Content Include="Views\UserLadder\Edit.cshtml" />
     <Content Include="Views\UserLadder\Index.cshtml" />
     <Content Include="Views\UserLadder\DisplayByLadder.cshtml" />
+    <Content Include="Views\Login\AdministrativeTools.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

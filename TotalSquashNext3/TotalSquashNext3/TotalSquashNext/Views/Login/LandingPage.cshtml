@@ -73,6 +73,17 @@
                                 <span class="sr-only">Statistics</span>
                             </a>
                         </li>
+                        <!--Shows link to administration only, for easy navigation to court booking rules, ladder rules, etc.-->
+                        @if ((((TotalSquashNext.Models.User)Session["currentUser"]).accountId == 1))
+                        {
+                            <li>
+
+                                <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                    <i class="icon-bar-chart icon-large"></i>
+                                    <span class="sr-only">Administrative Tools</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
