@@ -66,7 +66,7 @@ namespace TotalSquashNext.Controllers
 
                 var dateHolder = (from x in db.Bookings
                                   where x.bookingDate == (DateTime)Session["datePicked"]
-                                  select x.bookingNumber).Single();
+                                  select x.date).Single();
                 
 
                 var dateRules = (from x in db.BookingRules
@@ -84,6 +84,12 @@ namespace TotalSquashNext.Controllers
                 var numBookAllowed = (from x in db.BookingRules
                                       where x.bookingRuleId == 1
                                       select x.numOfBookings).Single();
+
+                var timeSpanRule = (from x in db.BookingRules
+                                    where x.bookingRuleId == 1
+                                    select x.bookingLength).Single();
+
+                TimeSpan bookingLength = new TimeSpan(0, timeSpanRule, 0);
 
                 booking.bookingRulesId = 1;
 
@@ -121,10 +127,32 @@ namespace TotalSquashNext.Controllers
                 }
                 else
                 {
-                    for (int i = 0; i <= 3; i++)
+                    List<DateTime> alternateBooking = new List<DateTime>();
+                    do
                     {
-                     
-                    }
+                        var alternateDateHolder = (from x in db.Bookings
+                                                   where x.bookingDate == ((DateTime)Session["datePicked"] + bookingLength)
+                                                   select x.date).Single();
+
+                        if (alternateDateHolder == null)
+                        {
+                            alternateBooking.Add(alternateDateHolder);
+                        }
+
+                    } while (alternateBooking.Count() != 3);
+                    do
+                    {
+                        var alternateDateHolder = (from x in db.Bookings
+                                                   where x.bookingDate == ((DateTime)Session["datePicked"] - bookingLength)
+                                                   select x.date).Single();
+                        if (alternateDateHolder == null)
+                        {
+                            alternateBooking.Add(alternateDateHolder);
+                        }
+                    } while (alternateBooking.Count() != 6);
+
+                    
+                    return RedirectToAction("BookACourt", "BookACourt"); // <----- Should work and should have a list of times available earlier and later than the desired time if unavailable BUT how do we call this shit??
                 }
 
 
