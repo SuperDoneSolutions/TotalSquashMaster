@@ -43,7 +43,7 @@ namespace TotalSquashNext.Controllers
         {
             if (Session["currentUser"] == null)
             {
-                TempData["message"] = "Please login!...Sneaky";
+                TempData["message"] = "Please login to continue.";
                 return RedirectToAction("VerifyLogin");
             }
             ViewBag.bookingCode = new SelectList(db.BookingTypes, "bookingCode", "description");
@@ -120,7 +120,7 @@ namespace TotalSquashNext.Controllers
                         }
                         else if (numBookings > numBookAllowed)
                         {
-                            TempData["Message"] = "Sorry friend. You cannot have more than " + numBookAllowed.ToString() + " booking!";
+                            TempData["Message"] = "Sorry friend. You cannot have more than " + numBookAllowed.ToString() + " bookings!";
                             return RedirectToAction("BookACourt", "BookACourt");
                         }
                     }

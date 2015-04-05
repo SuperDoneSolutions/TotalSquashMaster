@@ -47,7 +47,8 @@
                 <div class="container">
                     <ul>
                         <li>
-                            <a href="~/Booking/Create">
+
+                            <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                 <i class="icon-calendar icon-large"></i>
                                 <span class="sr-only">Book a Court</span>
                             </a>
@@ -56,8 +57,9 @@
                         <li>
 
                             <a href="@Url.Action("Edit","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                                <i class="icon-cogs icon-large"></i>
-                                <span class="sr-only">Edit</span>
+                                
+                                <i class="icon-group icon-large"></i>
+                                <span class="sr-only">Edit Profile</span>
                             </a>
                         </li>
                         <li>
@@ -78,8 +80,8 @@
                         {
                             <li>
 
-                                <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                                    <i class="icon-bar-chart icon-large"></i>
+                                <a href="@Url.Action("AdministrativeTools","Login", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                    <i class="icon-cogs icon-large"></i>
                                     <span class="sr-only">Administrative Tools</span>
                                 </a>
                             </li>
@@ -185,38 +187,38 @@
                             <div class="box-content">
 
                                 @*<form class="form-inline">*@
-                                    <p>Pick a date & Time</p>
-                                    <tr>
-                                        @using (Html.BeginForm())
-                                        {
-                                            
-                                            <td>
-                                                @*@Html.TextBoxFor(b => b.date, new { @class = "form-control" })*@
-                                            </td>
-                                            <td>
-                                                <input type="submit" value="Check Date" class="btn-xs" style="margin-top:1em;" />
-                                            </td>
-                                        }
-                                    </tr>
-                                    @*<div id="datepicker" class="input-prepend date">
-                                        <span class="add-on"><i class="icon-th"></i></span>
-                                        <input class="span2" type="text" value="Today's date...'">
-                                    </div>
-                                    <select class="chosen span4" data-placeholder="Choose a Time...">
-                                        <option value="530">5:30am-6:15am</option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value="United States">9:00-9:45am</option>
-                                        <option value="United Kingdom">9:45-10:30am</option>
-                                        <option value="Afghanistan">10:30-11:15am</option>
-                                        <option value="Albania">11:15am-12:00pm</option>
-                                        <option value="Algeria">12:00-12:45pm</option>
-                                        <option value="American Samoa">12:45-1:30pm</option>
-                                        <option value="Andorra">1:30-2:15pm</option>
-                                        <option value="Angola">etc...</option>
+                                <p>Pick a date & Time</p>
+                                <tr>
+                                    @using (Html.BeginForm())
+                                    {
 
-                                    </select>
-                                </form>*@
+                                        <td>
+                                            @*@Html.TextBoxFor(b => b.date, new { @class = "form-control" })*@
+                                        </td>
+                                        <td>
+                                            <input type="submit" value="Check Date" class="btn-xs" style="margin-top:1em;" />
+                                        </td>
+                                    }
+                                </tr>
+                                @*<div id="datepicker" class="input-prepend date">
+                                            <span class="add-on"><i class="icon-th"></i></span>
+                                            <input class="span2" type="text" value="Today's date...'">
+                                        </div>
+                                        <select class="chosen span4" data-placeholder="Choose a Time...">
+                                            <option value="530">5:30am-6:15am</option>
+                                            <option value=""></option>
+                                            <option value=""></option>
+                                            <option value="United States">9:00-9:45am</option>
+                                            <option value="United Kingdom">9:45-10:30am</option>
+                                            <option value="Afghanistan">10:30-11:15am</option>
+                                            <option value="Albania">11:15am-12:00pm</option>
+                                            <option value="Algeria">12:00-12:45pm</option>
+                                            <option value="American Samoa">12:45-1:30pm</option>
+                                            <option value="Andorra">1:30-2:15pm</option>
+                                            <option value="Angola">etc...</option>
+
+                                        </select>
+                                    </form>*@
                             </div>
                             <div class="box-footer">
                                 <a href="booking.html" class="btn btn-primary">
