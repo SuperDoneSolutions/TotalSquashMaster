@@ -4,4 +4,33 @@
 }
 
 <h2>Administrative Tools</h2>
+<table>
+    <tr>
+        <a href="@Url.Action("Index","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+    View Users
+</a>
+        </tr>
+    <tr><a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+    Book a Court
+</a></tr>
+    <tr>
+        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+            Book a Court
+        </a>
+    </tr>
+    <tr>
+        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+            Book a Court
+        </a>
+    </tr>
+    <tr>
+        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+            Book a Court
+        </a>
+    </tr>
+
+    
+
+</table>
+
 

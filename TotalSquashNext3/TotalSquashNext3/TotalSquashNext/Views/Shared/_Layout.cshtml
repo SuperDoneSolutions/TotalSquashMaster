@@ -51,14 +51,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Ladder","Ladders", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                            <a href="@Url.Action("Index","Ladder", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                 <i class="icon-list-alt icon-large"></i>
                                 <span class="sr-only">Squash Ladder</span>
                             </a>
                         </li>
                         <li>
 
-                            <a href="@Url.Action("Statistics","Statistics", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                            <a href="@Url.Action("Index","UserMatch", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                 <i class="icon-bar-chart icon-large"></i>
                                 <span class="sr-only">Statistics</span>
                             </a>
@@ -68,7 +68,7 @@
                         {
                             <li>
 
-                                <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                <a href="@Url.Action("AdministrativeTools","Login", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                     <i class="icon-cogs icon-large"></i>
                                     <span class="sr-only">Administrative Tools</span>
                                 </a>
@@ -77,14 +77,12 @@
                     </ul>
                 </div>
             </div>
-            </div>
-        </div>
+            
+        
 
 
-            <br>
+            
             <div class="container body-content">
-                </br>
-                </br>
                 <p class="text-danger">@TempData["message"]</p>
                 @RenderBody()
                 <hr />
@@ -94,6 +92,8 @@
                 </br>
                 </br>
             </div>
+    </div>
+        </div>
             <footer class="application-footer">
                 <div class="container">
                     <p>Total Squash</p>
