@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Ladder","Ladders", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                            <a href="@Url.Action("Index","Ladders", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                 <i class="icon-list-alt icon-large"></i>
                                 <span class="sr-only">Squash Ladder</span>
                             </a>
@@ -82,7 +82,7 @@
 
                                 <a href="@Url.Action("AdministrativeTools","Login", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                     <i class="icon-cogs icon-large"></i>
-                                    <span class="sr-only">Administrative Tools</span>
+                                    <span class="sr-only">Administration</span>
                                 </a>
                             </li>
                         }
