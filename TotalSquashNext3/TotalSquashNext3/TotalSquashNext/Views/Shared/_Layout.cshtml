@@ -31,104 +31,108 @@
             </div>
         </div>
     </div>
-    <div class="body-nav body-nav-horizontal body-nav-fixed">
-        <div class="container">
-            <ul>
-                <li>
-                    <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                        <i class="icon-calendar icon-large"></i>
-                        <span class="sr-only">Book a Court</span>
-                    </a>
-                </li>
+    <div id="body-container">
+        <div id="body-content">
+            <div class="body-nav body-nav-horizontal body-nav-fixed">
+                <div class="container">
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                <i class="icon-calendar icon-large"></i>
+                                <span class="sr-only">Book a Court</span>
+                            </a>
+                        </li>
 
-                <li>
+                        <li>
 
-                    <a href="@Url.Action("Edit","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                        <i class="icon-group icon-large"></i>
-                        <span class="sr-only">Edit Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Ladder","Ladders", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                        <i class="icon-list-alt icon-large"></i>
-                        <span class="sr-only">Squash Ladder</span>
-                    </a>
-                </li>
-                <li>
+                            <a href="@Url.Action("Edit","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                <i class="icon-group icon-large"></i>
+                                <span class="sr-only">Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Ladder","Ladders", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                <i class="icon-list-alt icon-large"></i>
+                                <span class="sr-only">Squash Ladder</span>
+                            </a>
+                        </li>
+                        <li>
 
-                    <a href="@Url.Action("Statistics","Statistics", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                        <i class="icon-bar-chart icon-large"></i>
-                        <span class="sr-only">Statistics</span>
-                    </a>
-                </li>
-                <!--Shows link to administration only, for easy navigation to court booking rules, ladder rules, etc.-->
-                @if ((((TotalSquashNext.Models.User)Session["currentUser"]).accountId == 1))
-                {
-                    <li>
+                            <a href="@Url.Action("Statistics","Statistics", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                <i class="icon-bar-chart icon-large"></i>
+                                <span class="sr-only">Statistics</span>
+                            </a>
+                        </li>
+                        <!--Shows link to administration only, for easy navigation to court booking rules, ladder rules, etc.-->
+                        @if ((((TotalSquashNext.Models.User)Session["currentUser"]).accountId == 1))
+                        {
+                            <li>
 
-                        <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                            <i class="icon-cogs icon-large"></i>
-                            <span class="sr-only">Administrative Tools</span>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
-
-
-    <br>
-    <div class="container body-content">
-        </br>
-        </br>
-        <p class="text-danger">@TempData["message"]</p>
-        @RenderBody()
-        <hr />
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
-    </div>
-    <footer class="application-footer">
-        <div class="container">
-            <p>Total Squash</p>
-            <div class="disclaimer">
-                <a style="color:#dfdfdf;" href="mailto:superdonesolutions@gmail.com">Contact Us</a>
-                <p>Copyright © Super Done Solutions 2015</p>
+                                <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+                                    <i class="icon-cogs icon-large"></i>
+                                    <span class="sr-only">Administrative Tools</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
             </div>
         </div>
-    </footer>
 
 
-    <script src="../../js/bootstrap/bootstrap-transition.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-alert.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-modal.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-dropdown.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-scrollspy.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-tab.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-tooltip.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-popover.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-button.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-collapse.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-carousel.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-typeahead.js" type="text/javascript"></script>
-    <script src="../../js/bootstrap/bootstrap-affix.js" type="text/javascript"></script>
-    @*<script src="../../js/bootstrap/bootstrap-datepicker.js" type="text/javascript"></script>*@
-    <script src="../../js/jquery/jquery-tablesorter.js" type="text/javascript"></script>
-    <script src="../../js/jquery/jquery-chosen.js" type="text/javascript"></script>
-    <script src="../../js/jquery/virtual-tour.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#sample-table').tablesorter();
-            //$('#datepicker').datepicker();
-            $(".chosen").chosen();
-        });
-    </script>
+            <br>
+            <div class="container body-content">
+                </br>
+                </br>
+                <p class="text-danger">@TempData["message"]</p>
+                @RenderBody()
+                <hr />
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+            <footer class="application-footer">
+                <div class="container">
+                    <p>Total Squash</p>
+                    <div class="disclaimer">
+                        <a style="color:#dfdfdf;" href="mailto:superdonesolutions@gmail.com">Contact Us</a>
+                        <p>Copyright © Super Done Solutions 2015</p>
+                    </div>
+                </div>
+            </footer>
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+            <script src="../../js/bootstrap/bootstrap-transition.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-alert.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-modal.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-dropdown.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-scrollspy.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-tab.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-tooltip.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-popover.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-button.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-collapse.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-carousel.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-typeahead.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap/bootstrap-affix.js" type="text/javascript"></script>
+            @*<script src="../../js/bootstrap/bootstrap-datepicker.js" type="text/javascript"></script>*@
+            <script src="../../js/jquery/jquery-tablesorter.js" type="text/javascript"></script>
+            <script src="../../js/jquery/jquery-chosen.js" type="text/javascript"></script>
+            <script src="../../js/jquery/virtual-tour.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $('#sample-table').tablesorter();
+                    //$('#datepicker').datepicker();
+                    $(".chosen").chosen();
+                });
+            </script>
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
 </body>
 </html>

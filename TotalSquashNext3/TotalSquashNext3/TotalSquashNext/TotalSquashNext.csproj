@@ -177,10 +177,12 @@
     <Compile Include="Controllers\LadderRuleController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\ProvincesController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\UserLadderController.cs" />
+    <Compile Include="Controllers\UserMatchController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -489,6 +491,16 @@
     <Content Include="Views\UserLadder\Index.cshtml" />
     <Content Include="Views\UserLadder\DisplayByLadder.cshtml" />
     <Content Include="Views\Login\AdministrativeTools.cshtml" />
+    <Content Include="Views\UserMatch\Create.cshtml" />
+    <Content Include="Views\UserMatch\Delete.cshtml" />
+    <Content Include="Views\UserMatch\Details.cshtml" />
+    <Content Include="Views\UserMatch\Edit.cshtml" />
+    <Content Include="Views\UserMatch\Index.cshtml" />
+    <Content Include="Views\Match\Create.cshtml" />
+    <Content Include="Views\Match\Delete.cshtml" />
+    <Content Include="Views\Match\Details.cshtml" />
+    <Content Include="Views\Match\Edit.cshtml" />
+    <Content Include="Views\Match\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
