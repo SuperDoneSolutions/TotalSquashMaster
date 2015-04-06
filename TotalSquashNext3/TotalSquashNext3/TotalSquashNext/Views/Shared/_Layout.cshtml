@@ -35,7 +35,7 @@
         <div class="container">
             <ul>
                 <li>
-                    <a href="~/Booking/Create">
+                    <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                         <i class="icon-calendar icon-large"></i>
                         <span class="sr-only">Book a Court</span>
                     </a>
@@ -44,8 +44,8 @@
                 <li>
 
                     <a href="@Url.Action("Edit","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                        <i class="icon-cogs icon-large"></i>
-                        <span class="sr-only">Edit</span>
+                        <i class="icon-group icon-large"></i>
+                        <span class="sr-only">Edit Profile</span>
                     </a>
                 </li>
                 <li>
@@ -67,7 +67,7 @@
                     <li>
 
                         <a href="@Url.Action("Administrative Tools","AdministrativeTools", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-                            <i class="icon-bar-chart icon-large"></i>
+                            <i class="icon-cogs icon-large"></i>
                             <span class="sr-only">Administrative Tools</span>
                         </a>
                     </li>
@@ -77,6 +77,7 @@
     </div>
 
 
+    <br>
     <div class="container body-content">
         </br>
         </br>
