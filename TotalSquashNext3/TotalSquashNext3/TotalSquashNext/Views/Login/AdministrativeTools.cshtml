@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Administrative Tools";
 }
 
@@ -7,15 +6,7 @@
 <table>
     <tr>
         <a href="@Url.Action("Index","Users", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-    View Users
-</a>
-        </tr>
-    <tr><a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-    Book a Court
-</a></tr>
-    <tr>
-        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-            Book a Court
+            View Users
         </a>
     </tr>
     <tr>
@@ -28,9 +19,23 @@
             Book a Court
         </a>
     </tr>
+    <tr>
+        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+            Book a Court
+        </a>
+    </tr>
+    <tr>
+        <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+            Book a Court
+        </a>
+    </tr>
+    <tr></tr>
 
-    
 
 </table>
 
-
+@*@using (Html.BeginForm())
+{
+    @Html.TextBox((string)ViewBag.NewsItemOne)
+    <input type="submit" value="Submit" />
+}*@

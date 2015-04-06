@@ -23,14 +23,14 @@ namespace TotalSquashNext.Controllers
                 TempData["message"] = "Please login to continue.";
                 return RedirectToAction("VerifyLogin", "Login");
             }
-            var userLadders = db.UserLadders.Include(u => u.Ladder).Include(u => u.User);
+            var userLadders = db.UserLadders.Include(u => u.Ladder).Include(u => u.User).OrderBy(u=>u.User.wins).ThenByDescending(u=>u.User.losses);
             return View(userLadders.ToList());
         }
 
-        //Displays chosen Ladder with users ordered by position
+        //Displays chosen Ladder with users ordered by most wins, then least losses (eg if user1 has 10 wins and 5 losses, and user2 has 10 wins and 0 losses, user2 is higher in the ladder)
         public ActionResult DisplayByLadder(int ladder)
         {
-            var users = db.UserLadders.Include(u => u.Ladder).Include(u => u.User).Where(x=>x.ladderId==ladder).OrderBy(x=>x.position);
+            var users = db.UserLadders.Include(u => u.Ladder).Include(u => u.User).Where(x=>x.ladderId==ladder).OrderBy(u=>u.User.wins).ThenByDescending(u=>u.User.losses);
             return View(users.ToList());
         }
 
