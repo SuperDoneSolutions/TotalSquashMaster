@@ -85,7 +85,7 @@ namespace TotalSquashNext.Controllers
 
                     if (passHolder.ToString() == tempPassVerify)
                     {
-                        TempData["message"] = "SUCCESS!";
+                        
                         var currentUser = (from x in db.Users
                                            where x.emailAddress == tempEmailVerify
                                            select x).ToList();
