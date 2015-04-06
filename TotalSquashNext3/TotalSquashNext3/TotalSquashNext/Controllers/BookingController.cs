@@ -13,8 +13,8 @@ namespace TotalSquashNext.Controllers
     public class BookingController : Controller
     {
         private PrimarySquashDBContext db = new PrimarySquashDBContext();
-        
-        
+
+
         // GET: Booking
         //Administrator - view all bookings
         public ActionResult Index()
@@ -61,25 +61,37 @@ namespace TotalSquashNext.Controllers
         {
             if (ModelState.IsValid)
             {
+                int userQuery = ((TotalSquashNext.Models.User)Session["currentUser"]).id;
                 booking.userId = (((TotalSquashNext.Models.User)Session["currentUser"]).id);
                 booking.bookingDate = DateTime.Now;
-
                 var dateHolder = (from x in db.Bookings
-                                  where x.bookingDate == (DateTime)Session["datePicked"]
-                                  select x.date).Single();
-                
+                                  where x.date == booking.date
+                                  select x.date).Count();
+
+                //if ((DateTime)Session["datePicked"] != null)
+                //{
+                //    dateHolder = (from x in db.Bookings
+                //                      where x.date == (DateTime)Session["datePicked"]
+                //                      select x.date).Single();
+                //}
+                //else
+                //{
+                //    dateHolder = (from x in db.Bookings
+                //                      where x.date == booking.date
+                //                      select x.date).Single();
+                //}
 
                 var dateRules = (from x in db.BookingRules
-                                     where x.bookingRuleId == 1
-                                     select x.daysInAdvance).Single();
+                                 where x.bookingRuleId == 1
+                                 select x.daysInAdvance).Single();
 
                 var dayStart = (from x in db.BookingRules
-                                     where x.bookingRuleId == 1
-                                     select x.dayStart).Single();
+                                where x.bookingRuleId == 1
+                                select x.dayStart).Single();
 
-                int numBookings = (from x in db.Bookings
-                                   where x.userId == ((TotalSquashNext.Models.User)Session["currentUser"]).id
-                                   select x.bookingNumber).Count();
+                var numBookings = (from x in db.Bookings
+                                   where x.userId == userQuery
+                                   select x).Count();
 
                 var numBookAllowed = (from x in db.BookingRules
                                       where x.bookingRuleId == 1
@@ -90,71 +102,88 @@ namespace TotalSquashNext.Controllers
                                     select x.bookingLength).Single();
 
                 TimeSpan bookingLength = new TimeSpan(0, timeSpanRule, 0);
+                
 
                 booking.bookingRulesId = 1;
 
                 DateTime currentDate = DateTime.Now;
-                DateTime datePicked = (DateTime)Session["datePicked"];
-                
-                
+                DateTime datePicked = booking.date;
+                DateTime checkDayRule = currentDate.AddDays((double)dateRules);
 
-                if (dateHolder == null)
+
+
+                if (dateHolder == 0)
                 {
-                    if (datePicked.AddDays((double)dateRules) <= currentDate && datePicked.TimeOfDay >= dayStart && numBookings <= numBookAllowed)
+                    if (datePicked <= checkDayRule && datePicked.TimeOfDay >= dayStart && numBookings <= numBookAllowed)
                     {
+                        TempData["Message"] = "Your court has been booked.";
                         db.Bookings.Add(booking);
                         db.SaveChanges();
-                        return RedirectToAction("BookACourt", "BookACourt");
+                        return RedirectToAction("LandingPage", "Login");
                     }
                     else
                     {
-                        if (datePicked.AddDays((double)dateRules) > currentDate)
+                        if (datePicked > checkDayRule)
                         {
                             TempData["Message"] = "Sorry friend. You cannot book more than " + dateRules.ToString() + " in advance!";
-                            return RedirectToAction("BookACourt", "BookACourt");
+                            return RedirectToAction("Create", "Booking");
                         }
                         else if (datePicked.TimeOfDay < dayStart)
                         {
                             TempData["Message"] = "Sorry friend. You cannot book a court earlier than " + dayStart.ToString() + " am!";
-                            return RedirectToAction("BookACourt", "BookACourt");
+                            return RedirectToAction("Create", "Booking");
                         }
-                        else if (numBookings > numBookAllowed)
+                        else if (numBookings >= numBookAllowed)
                         {
                             TempData["Message"] = "Sorry friend. You cannot have more than " + numBookAllowed.ToString() + " bookings!";
-                            return RedirectToAction("BookACourt", "BookACourt");
+                            return RedirectToAction("Create", "Booking");
                         }
                     }
                 }
                 else
                 {
-                    List<DateTime> alternateBooking = new List<DateTime>();
-                    do
+                    var availCourts = (from x in db.Bookings
+                                       where x.courtId != booking.courtId && x.date == null
+                                       select x.date).ToList();
+
+                    if (availCourts != null)
                     {
-                        var alternateDateHolder = (from x in db.Bookings
-                                                   where x.bookingDate == ((DateTime)Session["datePicked"] + bookingLength)
-                                                   select x.date).Single();
-
-                        if (alternateDateHolder == null)
-                        {
-                            alternateBooking.Add(alternateDateHolder);
-                        }
-
-                    } while (alternateBooking.Count() != 3);
-                    do
+                        TempData["Message"] = "Sorry that court is taken. Do any of these work?";
+                        ViewBag.alternateCourts = new SelectList(availCourts);
+                        return RedirectToAction("AlternateCourts", "Booking");
+                    }
+                    else
                     {
-                        var alternateDateHolder = (from x in db.Bookings
-                                                   where x.bookingDate == ((DateTime)Session["datePicked"] - bookingLength)
-                                                   select x.date).Single();
-                        if (alternateDateHolder == null)
-                        {
-                            alternateBooking.Add(alternateDateHolder);
-                        }
-                    } while (alternateBooking.Count() != 6);
 
-                    
-                    return RedirectToAction("BookACourt", "BookACourt"); // <----- Should work and should have a list of times available earlier and later than the desired time if unavailable BUT how do we call this shit??
+                        List<DateTime> alternateBooking = new List<DateTime>();
+                        do
+                        {
+                            var alternateDateHolder = (from x in db.Bookings
+                                                       where x.bookingDate == ((DateTime)Session["datePicked"] + bookingLength)
+                                                       select x.date).Single();
+
+                            if (alternateDateHolder == null)
+                            {
+                                alternateBooking.Add(((DateTime)Session["datePicked"] + bookingLength));
+                            }
+
+                        } while (alternateBooking.Count() != 3);
+                        do
+                        {
+                            var alternateDateHolder = (from x in db.Bookings
+                                                       where x.bookingDate == ((DateTime)Session["datePicked"] - bookingLength)
+                                                       select x.date).Single();
+                            if (alternateDateHolder == null)
+                            {
+                                alternateBooking.Add(((DateTime)Session["datePicked"] - bookingLength));
+                            }
+                        } while (alternateBooking.Count() != 6);
+
+                        TempData["Message"] = "Sorry nothing is available then. Do any of these work?";
+                        ViewBag.alternateBookings = new SelectList(alternateBooking);
+                        return RedirectToAction("AlternateBookings", "Booking"); // <----- Should work and should have a list of times available earlier and later than the desired time if unavailable BUT how do we call this shit??
+                    }
                 }
-
 
             }
 
