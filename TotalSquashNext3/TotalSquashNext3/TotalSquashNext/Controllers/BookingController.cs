@@ -47,7 +47,7 @@ namespace TotalSquashNext.Controllers
                 return RedirectToAction("VerifyLogin");
             }
             ViewBag.bookingCode = new SelectList(db.BookingTypes, "bookingCode", "description");
-            ViewBag.bookingRulesId = new SelectList(db.BookingRules, "bookingRuleId", "bookingRuleId");
+            //ViewBag.bookingRulesId = new SelectList(db.BookingRules, "bookingRuleId", "bookingRuleId");
             ViewBag.courtId = new SelectList(db.Courts, "courtId", "courtDescription");
             return View();
         }
@@ -59,34 +59,36 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "courtId,bookingNumber,bookingDate,bookingCode,userId,date,bookingRulesId")] Booking booking)
         {
+            const int NUMBER = 9;
+            const int RULES = 1;
+
             if (ModelState.IsValid)
             {
                 int userQuery = ((TotalSquashNext.Models.User)Session["currentUser"]).id;
                 booking.userId = (((TotalSquashNext.Models.User)Session["currentUser"]).id);
                 booking.bookingDate = DateTime.Now;
-                var dateHolder = (from x in db.Bookings
+                var dateHolder = NUMBER;
+                booking.bookingRulesId = RULES;
+
+                if ((DateTime)Session["datePicked"] != null)
+                {
+                    dateHolder = (from x in db.Bookings
+                                  where x.date == (DateTime)Session["datePicked"]
+                                  select x.date).Count();
+                }
+                else
+                {
+                    dateHolder = (from x in db.Bookings
                                   where x.date == booking.date
                                   select x.date).Count();
-
-                //if ((DateTime)Session["datePicked"] != null)
-                //{
-                //    dateHolder = (from x in db.Bookings
-                //                      where x.date == (DateTime)Session["datePicked"]
-                //                      select x.date).Single();
-                //}
-                //else
-                //{
-                //    dateHolder = (from x in db.Bookings
-                //                      where x.date == booking.date
-                //                      select x.date).Single();
-                //}
+                }
 
                 var dateRules = (from x in db.BookingRules
-                                 where x.bookingRuleId == 1
+                                 where x.bookingRuleId == RULES
                                  select x.daysInAdvance).Single();
 
                 var dayStart = (from x in db.BookingRules
-                                where x.bookingRuleId == 1
+                                where x.bookingRuleId == RULES
                                 select x.dayStart).Single();
 
                 var numBookings = (from x in db.Bookings
@@ -98,14 +100,11 @@ namespace TotalSquashNext.Controllers
                                       select x.numOfBookings).Single();
 
                 var timeSpanRule = (from x in db.BookingRules
-                                    where x.bookingRuleId == 1
+                                    where x.bookingRuleId == RULES
                                     select x.bookingLength).Single();
 
                 TimeSpan bookingLength = new TimeSpan(0, timeSpanRule, 0);
                 
-
-                booking.bookingRulesId = 1;
-
                 DateTime currentDate = DateTime.Now;
                 DateTime datePicked = booking.date;
                 DateTime checkDayRule = currentDate.AddDays((double)dateRules);
