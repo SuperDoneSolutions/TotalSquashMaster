@@ -46,6 +46,7 @@ namespace TotalSquashNext.Controllers
                 TempData["message"] = "Please login to continue.";
                 return RedirectToAction("VerifyLogin");
             }
+            Session["datePicked"] = new DateTime(2011, 6, 10, 15, 24, 16);
             ViewBag.bookingCode = new SelectList(db.BookingTypes, "bookingCode", "description");
             //ViewBag.bookingRulesId = new SelectList(db.BookingRules, "bookingRuleId", "bookingRuleId");
             ViewBag.courtId = new SelectList(db.Courts, "courtId", "courtDescription");
@@ -61,6 +62,7 @@ namespace TotalSquashNext.Controllers
         {
             const int NUMBER = 9;
             const int RULES = 1;
+            DateTime NODATE = new DateTime(2011, 6, 10, 15, 24, 16);
 
             if (ModelState.IsValid)
             {
@@ -70,7 +72,7 @@ namespace TotalSquashNext.Controllers
                 var dateHolder = NUMBER;
                 booking.bookingRulesId = RULES;
 
-                if ((DateTime)Session["datePicked"] != null)
+                if ((DateTime)Session["datePicked"] != NODATE)
                 {
                     dateHolder = (from x in db.Bookings
                                   where x.date == (DateTime)Session["datePicked"]
