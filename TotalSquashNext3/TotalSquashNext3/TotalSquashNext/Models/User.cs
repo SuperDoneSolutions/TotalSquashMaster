@@ -73,6 +73,7 @@ namespace TotalSquashNext.Models
         public string gender { get; set; }
 
         [Display(Name = "Date of Birth")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
 
         [Display(Name = "Account Type")]
