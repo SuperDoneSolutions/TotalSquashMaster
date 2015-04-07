@@ -23,13 +23,15 @@ namespace TotalSquashNext.Models
 
         [Display(Name = "User ID")]
         public int id { get; set; }
-
+        
+        [Required]
         [Display(Name = "Username")]
         public string username { get; set; }
 
         [Display(Name = "Skill Level")]
         public int skillId { get; set; }
 
+        [Required]
         [Display(Name = "Password")]
         public string password { get; set; }
 
@@ -45,33 +47,46 @@ namespace TotalSquashNext.Models
         [Display(Name = "Ties")]
         public Nullable<int> ties { get; set; }
 
+        [Required]
         [Display(Name = "First Name")]
+        [RegularExpression("([a-zA-Z0-9 .&'-]+)", ErrorMessage = "Enter only alphabets and numbers of First Name")]
         public string firstName { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
+        [RegularExpression("([a-zA-Z0-9 .&'-]+)", ErrorMessage = "Enter only alphabets and numbers of Last Name")]
         public string lastName { get; set; }
 
+        [Required]
         [Display(Name = "Address")]
         public string streetAddress { get; set; }
 
+        [Required]
         [Display(Name = "City")]
         public string city { get; set; }
 
+        [Required]
         [Display(Name = "Province")]
         public string provinceId { get; set; }
 
+        [Required]
         [Display(Name = "Country")]
         public int countryId { get; set; }
 
+        [Required]
         [Display(Name = "Phone Number")]
+        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Please enter like 123-123-1234")]
         public string phoneNumber { get; set; }
 
+        [Required]
         [Display(Name = "E-mail")]
         public string emailAddress { get; set; }
 
+        [Required]
         [Display(Name = "Identified Gender")]
         public string gender { get; set; }
 
+        [Required]
         [Display(Name = "Date of Birth")]
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
@@ -82,10 +97,13 @@ namespace TotalSquashNext.Models
         [Display(Name = "Locked")]
         public bool locked { get; set; }
 
+        [Required]
         [Display(Name = "Organization")]
         public int organizationId { get; set; }
 
+        [Required]
         [Display(Name = "Postal Code")]
+        [RegularExpression(@"[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d", ErrorMessage = "Please enter like: L7N 2Y2")] 
         public string postalCode { get; set; }
     
        
