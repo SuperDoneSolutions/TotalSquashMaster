@@ -20,7 +20,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="brand" href="@Url.Action("LandingPage","Login")">Total Squash</a>
+                <a href="~/Views/Login/LandingPage.cshtml" class="brand"><img src="~/Images/TSheader02.png" style="padding-top: 10px;" /></a>
+                @*<a class="brand" href="@Url.Action("LandingPage","Login")">Total Squash</a>*@
 
                 <ul class="nav pull-right">
                     <li>
@@ -33,8 +34,9 @@
     </div>
     <div id="body-container">
         <div id="body-content">
-            <div class="body-nav body-nav-horizontal body-nav-fixed">
+            <div class="body-nav body-nav-horizontal body-nav-fixed" style="padding-bottom:7em;">
                 <div class="container">
+                    <br />
                     <ul>
                         <li>
                             <a href="@Url.Action("Create","Booking", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
@@ -70,7 +72,7 @@
 
                                 <a href="@Url.Action("AdministrativeTools","Login", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
                                     <i class="icon-cogs icon-large"></i>
-                                    <span>Administrative Tools</span>
+                                    <span>Administration</span>
                                 </a>
                             </li>
                         }
