@@ -22,12 +22,13 @@
         </th>
         <th></th>
     </tr>
-
+    @{int count=0;}
     @foreach (var item in Model)
     {
+        
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.position)
+                @count++;
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ladder.ladderDescription)
@@ -36,9 +37,8 @@
                 @Html.DisplayFor(modelItem => item.User.username)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a href="mailto:"+item.User.email>Contact</a>
+
             </td>
         </tr>
     }
