@@ -30,7 +30,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ladderId }) |
-            @Html.ActionLink("View Ladder", "DisplayByLadder", "UserLadder", new { id=item.ladderId }, null) |
+            @Html.ActionLink("View Ladder", "DisplayByLadder", "UserLadder", new { ladderId = item.ladderId, userId = (((TotalSquashNext.Models.User)Session["currentUser"]).id) }, null) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ladderId })
         </td>
     </tr>

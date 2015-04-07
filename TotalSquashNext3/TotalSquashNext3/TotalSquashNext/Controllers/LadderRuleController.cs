@@ -20,10 +20,15 @@ namespace TotalSquashNext.Controllers
         // GET: LadderRule
         public ActionResult Index()
         {
-            if (Session["currentUser"] == null || Session["currentUser"]=="")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             return View(db.LadderRules.ToList());
         }
@@ -31,10 +36,15 @@ namespace TotalSquashNext.Controllers
         // GET: LadderRule/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             if (id == null)
             {
@@ -51,10 +61,15 @@ namespace TotalSquashNext.Controllers
         // GET: LadderRule/Create
         public ActionResult Create()
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             return View();
         }
@@ -66,10 +81,15 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LadderRuleId,challengeRange,challengeLower,numLadders")] LadderRule ladderRule)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             if (ModelState.IsValid)
             {
@@ -84,10 +104,15 @@ namespace TotalSquashNext.Controllers
         // GET: LadderRule/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             if (id == null)
             {
@@ -108,10 +133,15 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "LadderRuleId,challengeRange,challengeLower,numLadders")] LadderRule ladderRule)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             if (ModelState.IsValid)
             {
@@ -125,10 +155,15 @@ namespace TotalSquashNext.Controllers
         // GET: LadderRule/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             if (id == null)
             {
@@ -147,10 +182,15 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (Session["currentUser"] == null || Session["currentUser"] == "")
+            if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
-                return RedirectToAction("VerifyLogin");
+                return RedirectToAction("VerifyLogin", "Login");
+            }
+            if (((TotalSquashNext.Models.User)Session["currentUser"]).accountId != 1)
+            {
+                TempData["message"] = "You must be an administrator to access this page.";
+                return RedirectToAction("VerifyLogin", "Login");
             }
             LadderRule ladderRule = db.LadderRules.Find(id);
             db.LadderRules.Remove(ladderRule);
