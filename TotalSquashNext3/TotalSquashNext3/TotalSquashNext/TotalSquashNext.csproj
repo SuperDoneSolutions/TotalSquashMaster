@@ -279,6 +279,8 @@
     <Content Include="Images\anon.png" />
     <Content Include="Images\drop-target.png" />
     <Content Include="Images\totalSquashLogo.png" />
+    <Content Include="Images\TSheader.png" />
+    <Content Include="Images\TSheader02.png" />
     <Content Include="js\bootstrap\bootstrap-affix.js" />
     <Content Include="js\bootstrap\bootstrap-alert.js" />
     <Content Include="js\bootstrap\bootstrap-button.js" />
