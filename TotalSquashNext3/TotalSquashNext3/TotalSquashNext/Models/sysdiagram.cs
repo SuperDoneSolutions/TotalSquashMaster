@@ -11,12 +11,19 @@ namespace TotalSquashNext.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class sysdiagram
     {
+        [Display(Name = "Name")]
         public string name { get; set; }
+
+        [Display(Name = "Principal ID")]
         public int principal_id { get; set; }
+
+        [Display(Name = "Diagram ID")]
         public int diagram_id { get; set; }
+
         public Nullable<int> version { get; set; }
         public byte[] definition { get; set; }
     }

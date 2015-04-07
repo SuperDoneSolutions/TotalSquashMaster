@@ -11,6 +11,7 @@ namespace TotalSquashNext.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Country
     {
@@ -20,7 +21,9 @@ namespace TotalSquashNext.Models
             this.Users = new HashSet<User>();
         }
     
+        [Display(Name = "Country ID")]
         public int countryId { get; set; }
+        [Display(Name = "Country Name")]
         public string countryName { get; set; }
     
         public virtual ICollection<Province> Provinces { get; set; }
