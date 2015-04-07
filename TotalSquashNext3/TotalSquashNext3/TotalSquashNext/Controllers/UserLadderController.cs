@@ -28,9 +28,9 @@ namespace TotalSquashNext.Controllers
         }
 
         //Displays chosen Ladder with users ordered by most wins, then least losses (eg if user1 has 10 wins and 5 losses, and user2 has 10 wins and 0 losses, user2 is higher in the ladder)
-        public ActionResult DisplayByLadder(int ladderId,int userId)
+        public ActionResult DisplayByLadder(int ladder)
         {
-            var users = db.UserLadders.Include(u => u.Ladder).Include(u => u.User).Where(x=>x.ladderId==ladderId).OrderBy(u=>u.User.wins).ThenByDescending(u=>u.User.losses);
+            var users = db.UserLadders.Include(u => u.Ladder).Include(u => u.User).Where(x=>x.ladderId==ladder).OrderBy(u=>u.User.wins).ThenByDescending(u=>u.User.losses);
             return View(users.ToList());
         }
 

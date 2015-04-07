@@ -1,46 +1,42 @@
-﻿@model IEnumerable<TotalSquashNext.Models.UserLadder>
+﻿@model TotalSquashNext.Models.UserLadder
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = string.Format("{0} Ladder",Model.Ladder.ladderDescription);
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+<div>
+    @*<h4>UserLadder</h4>*@
+    <hr />
+    <dl class="dl-horizontal" id="e4">
+        <dt>
             @Html.DisplayNameFor(model => model.position)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Ladder.ladderDescription)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ladder.ladderDescription)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.User.username)
-        </th>
-        <th></th>
-    </tr>
+        </dt>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ladder.ladderDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.username)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+        <dd>
+            @Html.DisplayFor(model => model.User.username)
+        </dd>
 
-</table>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
