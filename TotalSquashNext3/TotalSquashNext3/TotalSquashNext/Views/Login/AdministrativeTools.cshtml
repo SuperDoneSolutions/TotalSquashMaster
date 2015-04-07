@@ -30,8 +30,13 @@
     </a><br />
 
     <a href="@Url.Action("Index","Match", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
-        Manage Matches
+        Manage Booked Matches
     </a><br />
+
+    <a href="@Url.Action("Index","UserMatch", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
+        Manage Users' Matches
+    </a><br />
+
     <a href="@Url.Action("Index","Provinces", new { id = (((TotalSquashNext.Models.User)Session["currentUser"]).id) })">
         Manage Provinces
     </a><br />
