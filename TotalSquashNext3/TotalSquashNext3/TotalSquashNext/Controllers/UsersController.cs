@@ -170,6 +170,7 @@ namespace TotalSquashNext.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,username,skillId,password,photo,wins,losses,ties,firstName,lastName,streetAddress,city,provinceId,postalCode,countryId,phoneNumber,emailAddress,gender,birthDate,accountId,locked,organizationId")] User user)
         {
+            SimplerAES ep = new SimplerAES();
             if (Session["currentUser"] == null)
             {
                 TempData["message"] = "Please login to continue.";
@@ -182,11 +183,16 @@ namespace TotalSquashNext.Controllers
                 user.losses = (((TotalSquashNext.Models.User)Session["currentUser"]).losses);
                 user.ties = (((TotalSquashNext.Models.User)Session["currentUser"]).ties);
                 user.emailAddress = (((TotalSquashNext.Models.User)Session["currentUser"]).emailAddress);
+                string tempPass = user.password;
+                string encryptedPass = ep.Encrypt(tempPass);
+
+                user.password = encryptedPass;
 
 
 
 
                 db.Entry(user).State = EntityState.Modified;
+
                 db.SaveChanges();
                 return RedirectToAction("LandingPage", "Login");
             }
