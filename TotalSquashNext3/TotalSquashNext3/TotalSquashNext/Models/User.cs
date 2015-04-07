@@ -75,7 +75,7 @@ namespace TotalSquashNext.Models
 
         [Required]
         [Display(Name = "Phone Number")]
-        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Please enter like 123-123-1234")]
+        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Please enter: 123-123-1234")]
         public string phoneNumber { get; set; }
 
         [Required]
@@ -87,7 +87,7 @@ namespace TotalSquashNext.Models
         public string gender { get; set; }
 
         [Required]
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "Date of Birth (DD/MMM/YYYY)")]
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime birthDate { get; set; }
 
@@ -103,7 +103,7 @@ namespace TotalSquashNext.Models
 
         [Required]
         [Display(Name = "Postal Code")]
-        [RegularExpression(@"[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d", ErrorMessage = "Please enter like: L7N 2Y2")] 
+        [RegularExpression(@"[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d", ErrorMessage = "Please enter like: L7N2Y2")] 
         public string postalCode { get; set; }
     
        
